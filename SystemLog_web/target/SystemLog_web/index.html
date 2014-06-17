@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/highcharts.js"></script>
+  <script type="text/javascript" src="js/exporting.js"></script>
+  <script type="text/javascript" >
+  $(function() {
+	    $( "#datepicker" ).datepicker();
+	    $("#search").click(function(){
+	    	//==
+	    		var select_time=$('#datepicker').val();
+	    	  alert(select_time);
+	    		bind_highCharts_div();
+	    	//==
+	    });
+	  });
+  
+  function bind_highCharts_div(){
+		
+      $('#container').highcharts({
+        chart: {
+            type: 'column',
+            margin: [ 50, 50, 100, 80]
+        },
+        title: {
+            text: 'Worlds largest cities per 2008'
+        },
+        xAxis: {
+            categories: [
+                '00:00-01:00',
+                '01:00-02:00',
+                '02:00-03:00',
+                '03:00-04:00',
+                '04:00-05:00',
+                '05:00-06:00',
+                '06:00-07:00',
+                '07:00-08:00',
+                '08:00-09:00',
+                '09:00-10:00',
+                '10:00-11:00',
+                '11:00-12:00',
+                '12:00-13:00',
+                '13:00-14:00',
+                '14:00-15:00',
+                '15:00-16:00',
+                '16:00-17:00',
+                '17:00-18:00',
+                '18:00-19:00',
+                '19:00-20:00',
+                '20:00-21:00',
+                '21:00-22:00',
+                '22:00-23:00',
+                '23:00-24:00'
+            ],
+            labels: {
+                rotation: -45,
+                align: 'right',
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Click '
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+           /* pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>',*/
+           pointFormat:'{point.y:.1f}',
+        },
+        series: [{
+            name: 'Population',
+            data: [34.4, 21.8, 20.1, 20, 19.6, 19.5, 19.1, 18.4, 18,
+                17.3, 16.8, 15, 14.7, 14.5, 13.3, 12.8, 12.4, 11.8,
+                11.7, 11.2,12,11.4,13.5,16.0],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                x: 4,
+                y: 10,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif',
+                    textShadow: '0 0 3px black'
+                }
+            }
+        }]
+    });
+  
+  }
+  </script>
+  
+  <script type="text/javascript">
+  
+
+  </script>
+
+  <script type="text/javascript">
+
+  </script>
+</head>
+<body>
+<div>
+Date: <input type="text" id="datepicker"> <input type="button"  value="search" id="search"/>
+</div>
+<br/>
+ <div id="container" style="min-width:700px;height:400px"></div>
+</body>
+</html>

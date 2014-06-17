@@ -1,0 +1,24 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+	<display-name>SystemLog_web</display-name>
+	<filter>
+		<filter-name>EncodeFileter</filter-name>
+		<filter-class>com.baihuogou.systemlog.filter.EncodeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodeFileter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>pv</servlet-name>
+		<servlet-class>com.baihuogou.systemlog.action.PVAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>pv</servlet-name>
+		<url-pattern>/pv</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
