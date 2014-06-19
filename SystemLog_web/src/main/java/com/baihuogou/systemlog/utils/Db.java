@@ -23,9 +23,8 @@ public class Db {
 	private static  String DB_PASSWORD = null;
 	
 	static{
-		PropertiesUtil pro=new PropertiesUtil();
 		 try {   
-	            InputStream in = pro.getClass().getResourceAsStream(FILE_PATH_NAME);   
+	            InputStream in = PropertiesUtil.class.getClassLoader().getResourceAsStream(FILE_PATH_NAME);   
 	            Properties props = new Properties();   
 	            props.load(in);   
 	            in.close();  

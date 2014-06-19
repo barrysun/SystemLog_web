@@ -34,6 +34,7 @@ public class PVAction extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		String SearchTime=req.getParameter("search_time");
 		String SearchMethod=req.getParameter("search_method");
+		System.out.println(SearchTime+"|"+SearchMethod);
 		if(SearchTime==null||SearchTime.equals("")){
 			out.print(Constant.HTTP_JSON_ERROR_NULL);
 			out.flush();
