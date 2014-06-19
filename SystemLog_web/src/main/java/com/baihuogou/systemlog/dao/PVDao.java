@@ -7,6 +7,6 @@ import com.baihuogou.systemlog.model.PV;
 
 public interface PVDao {
 	
-	public List<PV> pvHourByDate(Calendar cal) throws NumberFormatException, Exception;
+	public List<PV> pvHourByDate(Calendar cal,String MethodType) throws NumberFormatException, Exception;
 
 }

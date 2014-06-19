@@ -21,7 +21,7 @@
 	<dependencies>
 
 		<!-- 日志 -->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
@@ -36,7 +36,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.classic.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 伪静态 -->
 		<dependency>
@@ -46,11 +46,11 @@
 		</dependency>
 
 		<!-- Ebean(轻量级ORM)和数据库驱动 -->
-		<dependency>
+		<!-- <dependency>
 				<groupId>org.avaje.ebeanorm</groupId>
 				<artifactId>avaje-ebeanorm</artifactId>
 				<version>3.1.2</version>
-			</dependency>
+			</dependency> -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -81,7 +81,7 @@
 			<version>1.1.2</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.1</version>
@@ -95,7 +95,7 @@
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1</version>
-		</dependency>
+		</dependency> -->
 
 
 		<dependency>
@@ -106,12 +106,12 @@
 		</dependency>
 
 
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 	<build>

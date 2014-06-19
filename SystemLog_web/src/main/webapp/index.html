@@ -3,37 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+  
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script type="text/javascript" src="js/highcharts.js"></script>
   <script type="text/javascript" src="js/exporting.js"></script>
+   <link rel="stylesheet" href="js/ui_load/ui.loading.css">
+  <script type="text/javascript" src="js/ui_load/ui.loading.js"></script>
   <script type="text/javascript" >
   $(function() {
 	    $( "#datepicker" ).datepicker();
-	    $("#search").click(function(){
-	    	//==
-	    	  var select_time=$('#datepicker').val();
-	    	 // alert(select_time);
-	    	  bind_highCharts_div();
-	    	  $.post("pv",
-	    			 {search_time:select_time},
-	    	         function(data, textStatus){
-	    	        	// alert(data);
-	    	        	 /*var arr_data=[34.4, 21.8, 20.1, 20, 19.6, 19.5, 19.1, 18.4, 18,
-	    	        	                17.3, 16.8, 15, 14.7, 14.5, 13.3, 12.8, 12.4, 11.8,
-	    	        	                11.7, 11.2,12,11.4,13.5,16.0];*/
-	    	        	  var arr_data= new Array();
-	    	        	  var arr_data_str=data.split(",");
-	    	        	  for(var i=0;i<arr_data_str.length;i++){
-	    	        		  arr_data[i]=arr_data_str[i]*1;
-	    	        	  }
-	    	        	 bind_highCharts_div(arr_data);
-	    	         });
-	    	  
-	    	//==
+	    //bind click
+	    $('#radio1').click(function(){
+	    	 view_PV('ALL');
 	    });
-	  });
+	    $('#radio2').click(function(){
+	    	 view_PV('POST');
+	    });
+	    $('#radio3').click(function(){
+	    	 view_PV('GET');
+	    });
+
+  });
+  function view_PV(method_type){
+  	//==
+  	  var select_time=$('#datepicker').val();
+  	 // alert(select_time);
+  	 $(document).ui_loading({
+                overlay:true,
+				opacity:0.8,
+				supportIframe:true,
+                message:'正在加载数据.....'
+                });
+  	
+  	  $.post("pv",
+  			 {search_time:select_time,search_method:method_type},
+  	         function(data, textStatus){
+  	        	 var message_data=eval('('+data+')');
+  	        	 var data_code=message_data['code'];
+  	        	 var data_data=message_data['data'];
+  	        	 if(data_code!=200){
+  	        		 alert(data_data);
+  	        		 return;
+  	        	 }
+  	        	/*var arr_data=[34.4, 21.8, 20.1, 20, 19.6, 19.5, 19.1, 18.4, 18,
+  	        	                17.3, 16.8, 15, 14.7, 14.5, 13.3, 12.8, 12.4, 11.8,
+  	        	                11.7, 11.2,12,11.4,13.5,16.0];*/
+  	        	  var arr_data= new Array();
+  	        	  var arr_data_str=data_data.split(",");
+  	        	  for(var i=0;i<arr_data_str.length;i++){
+  	        		  arr_data[i]=arr_data_str[i]*1;
+  	        	  }
+  	        	 bind_highCharts_div(arr_data);
+  	        	$("#ui_loading_progressBar").hide();
+  	         });
+  	  
+  	//==
+}
   
   function bind_highCharts_div(arr_data){
 		
@@ -117,8 +145,9 @@
   </script>
   
   <script type="text/javascript">
-  
-
+  $(function() {
+	    $( "#radio" ).buttonset();
+	  });
   </script>
 
   <script type="text/javascript">
@@ -127,7 +156,17 @@
 </head>
 <body>
 <div>
-Date: <input type="text" id="datepicker" name="search_time"> <input type="button"  value="search" id="search"/>
+
+</div>
+<br/>
+<div>
+ 
+<div id="radio">
+Date: <input type="text" id="datepicker" name="search_time">
+    <input type="radio" id="radio1" name="radio"><label for="radio1">ALL</label>
+    <input type="radio" id="radio2" name="radio" ><label for="radio2">POST</label>
+    <input type="radio" id="radio3" name="radio"><label for="radio3">GET</label>
+  </div>
 </div>
 <br/>
  <div id="container" style="min-width:700px;height:400px"></div>

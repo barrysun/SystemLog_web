@@ -13,15 +13,19 @@ import com.baihuogou.systemlog.utils.Db;
 
 public class PVDaoImpl implements PVDao {
 
-	private static String pvSQL="select count(*) as pv_count from system_nginx_log_%s where time_local like '%s';";
-	public List<PV> pvHourByDate(Calendar cal) throws NumberFormatException, Exception {
+	private static String pvSQL="select count(*) as pv_count from system_nginx_log_%s where time_local like '%s' %s;";
+	public List<PV> pvHourByDate(Calendar cal,String MethodType) throws NumberFormatException, Exception {
+		
+		String whereStr=(MethodType==null||MethodType.equals("")||MethodType.equals("ALL"))?"":(
+				MethodType.equals("POST")?" and request like '%POST /%'":(MethodType.equals("GET"))?" and request like '%GET /%'":""
+				);
 		List<PV> pvList=new ArrayList<PV>();
 		Date date=cal.getTime();
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 		String dateStr=df.format(date);
 		String year=dateStr.substring(0,4);
 		for(int i=0; i<24;i++ ){
-		 pvList.add(new PV(i,Integer.parseInt(Db.ExecuteQuery(String.format(pvSQL, dateStr.toString(),"%"+year+":"+(i<10?"0"+i:i)+"%"), null).get(0).get("pv_count").toString())));
+		 pvList.add(new PV(i,Integer.parseInt(Db.ExecuteQuery(String.format(pvSQL, dateStr.toString(),"%"+year+":"+(i<10?"0"+i:i)+"%",whereStr), null).get(0).get("pv_count").toString())));
 		}
 		return pvList;
 	}

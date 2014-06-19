@@ -11,9 +11,9 @@ public class PVService {
 	
 	public static PVDao pvDao=null;
 	
-	public static String pVStr(Calendar cal) throws NumberFormatException, Exception{
+	public static String pVStr(Calendar cal,String MethodType) throws NumberFormatException, Exception{
 		pvDao=new PVDaoImpl();
-		List<PV> pvList=pvDao.pvHourByDate(cal);
+		List<PV> pvList=pvDao.pvHourByDate(cal,MethodType);
 		StringBuilder str=new StringBuilder();
 		for(int i=0;i<24;i++){
 			str.append(","+pvList.get(i).getClickCount());
